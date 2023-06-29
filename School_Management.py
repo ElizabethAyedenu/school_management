@@ -186,9 +186,9 @@ class Main(QMainWindow, FORM_CLASS):
         selectedpaymentid= self.payments_table_widget.item(row, 0 ).text() 
         # newFormat=QtCore.QDateTime.fromString(self.payments_table_widget.item(row, 4 ).text(), "dd/mm/yyyy")
         # self.payment_date_edit.setDate(newFormat)
+        self.Payment_amount.setText(self.payments_table_widget.item(row, 6 ).text() )
         self.add_payment_btn_3.setText("Update Payment")
         
-       
 
     def deletePaymentData(self):
         global selectedpaymentid
@@ -241,18 +241,21 @@ class Main(QMainWindow, FORM_CLASS):
         self.branch_table_widget.setRowCount(0)
         self.add_branch_btn.setText("Add Branch")
         selectedBranchId=None
+        totalBranch=0
         
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
+            totalBranch=totalBranch+1
             self.branch_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.branch_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
-        
+        self.Total_branch_label.setText(str(totalBranch))
         for item_data in self.GET_DATA_FROM_DB(query):
             self.Employee_branch_drop.addItem(item_data[1],item_data[0],  )
             self.class_branch_type_drop.addItem(item_data[1], item_data[0])
             self.student_branch_drop.addItem(item_data[1], item_data[0])
             self.payment_branch_drop.addItem(item_data[1], item_data[0])
-            self.course_branch_drop.addItem(item_data[1], item_data[0])  
+            self.course_branch_drop.addItem(item_data[1], item_data[0]) 
+            self.Dashboard_branch_drop.addItem(item_data[1], item_data[0]) 
             
   
         
@@ -279,12 +282,15 @@ class Main(QMainWindow, FORM_CLASS):
         query=''' SELECT * from students ''' 
         self.student_table_widget.setRowCount(0)
         selectedstudentId= None
+        totalStudents=0
 
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
+            
+            totalStudents=totalStudents+1
             self.student_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.student_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
-                
+        self.Total_students_label.setText(str(totalStudents))
         for item_data in self.GET_DATA_FROM_DB(query):
             self.payment_student_drop.addItem(item_data[1],item_data[0])
             self.stu_course_student_drop_btn.addItem(item_data[1],item_data[0])
@@ -298,13 +304,21 @@ class Main(QMainWindow, FORM_CLASS):
         
         self.employee_table_widget.setRowCount(0)
         selectedemployeeId=None
+        totalEmp=0
+        totalTeacher=0
+        
         
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
+            totalEmp=totalEmp+1
+            print(row_data[2])
+            if(row_data[2]=="Teacher"):
+                totalTeacher=totalTeacher+1
             self.employee_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.employee_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
                 
-                
+        self.Total_employee_label.setText(str(totalEmp))
+        self.Total_teachers_label.setText(str(totalTeacher))
         for item_data in self.GET_DATA_FROM_DB(query):
             self.course_employee_drop.addItem(item_data[1],item_data[0])
     # here is our code
@@ -331,12 +345,17 @@ class Main(QMainWindow, FORM_CLASS):
         global selectedpaymentid        
         query=''' SELECT * from payments '''        
         self.payments_table_widget.setRowCount(0)
-        selectedpaymentid=None      
+        selectedpaymentid=None 
+        totalRevenue=0     
 
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
+           
+           
+            totalRevenue=totalRevenue+row_data[6]
             self.payments_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.payments_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+            self.Total_revenue_label.setText(str(totalRevenue))
                 
     # here is our code
     
@@ -411,7 +430,7 @@ class Main(QMainWindow, FORM_CLASS):
         stu_class_id=str(self.student_class_drop.currentData())
         db=sqlite3.connect("school.db")
         cursor=db.cursor()
-        if(selectedstudentId):
+        if(selectedstudentId==None):
             cursor.execute("INSERT INTO students(name,phone_number,branch_id,class_id) VALUES(?,?,?,?)",(stu_name,stu_phone,stu_branch_id,stu_class_id) )
         else:
             cursor.execute("update students set name=(?),phone_number=(?),branch_id=(?),class_id=(?) where student_id=(?)",(stu_name,stu_phone,stu_branch_id,stu_class_id,selectedstudentId) )
@@ -428,7 +447,7 @@ class Main(QMainWindow, FORM_CLASS):
                 
         db=sqlite3.connect("school.db")
         cursor=db.cursor()
-        if(selectedcourseId):
+        if(selectedcourseId==None):
             cursor.execute("INSERT INTO courses(price,name,branch_id,employee_id) VALUES(?,?,?,?)",(course_price,course_name,course_branch_id,course_emp_id) )
         else:
             cursor.execute("update courses set price=(?),name=(?),branch_id=(?),employee_id=(?) where course_id=(?)",(course_price,course_name,course_branch_id,course_emp_id,selectedcourseId) )
@@ -443,13 +462,14 @@ class Main(QMainWindow, FORM_CLASS):
         pay_course_id=str(self.payment_course_drop.currentData())
         pay_payment_type=self.payment_type_drop.currentText()
         pay_date=self.payment_date_edit.text()
+        pay_amount=self.Payment_amount.text()
                 
         db=sqlite3.connect("school.db")
         cursor=db.cursor()
-        if (selectedpaymentid):
-            cursor.execute("INSERT INTO payments(student_id,branch_id,course_id,payment_type,date) VALUES(?,?,?,?,?)",(pay_stu_id,pay_branch_id,pay_course_id,pay_payment_type,pay_date) )
+        if (selectedpaymentid==None):
+            cursor.execute("INSERT INTO payments(student_id,branch_id,course_id,payment_type,date,amount) VALUES(?,?,?,?,?,?)",(pay_stu_id,pay_branch_id,pay_course_id,pay_payment_type,pay_date,pay_amount) )
         else :
-            cursor.execute("update payments set student_id=(?),branch_id=(?),course_id=(?),payment_type=(?),date=(?) where payment_id=(?)",(pay_stu_id,pay_branch_id,pay_course_id,pay_payment_type,pay_date,selectedpaymentid))
+            cursor.execute("update payments set student_id=(?),branch_id=(?),course_id=(?),payment_type=(?),date=(?),amount=(?) where payment_id=(?)",(pay_stu_id,pay_branch_id,pay_course_id,pay_payment_type,pay_date,pay_amount,selectedpaymentid))
         db.commit()
         cursor.close()
         self.GET_PAYMENTS_DATA()
@@ -460,7 +480,7 @@ class Main(QMainWindow, FORM_CLASS):
         stu_course_course_id=str(self.stu_course_course_drop.currentData())
         db=sqlite3.connect("school.db")
         cursor=db.cursor()
-        if(selectedstu_courseId):
+        if(selectedstu_courseId==None):
             cursor.execute("INSERT INTO students_courses(student_id,course_id) VALUES(?,?)",(stu_course_student_id,stu_course_course_id) )
         else:
             cursor.execute("update students_courses set student_id=(?),course_id=(?) where student_course_id=(?)",(stu_course_student_id,stu_course_course_id,selectedstu_courseId))
