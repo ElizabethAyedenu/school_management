@@ -161,7 +161,7 @@ background-color: rgb(0, 85, 255);
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 15pt &quot;Century Gothic&quot;;
+        <string notr="true">font: 75 10pt &quot;Century Gothic&quot;;
 background-color: rgb(255, 85, 255);
 background-color: rgb(209, 0, 209);
 background-color: rgb(200, 200, 200);</string>
@@ -176,16 +176,16 @@ background-color: rgb(200, 200, 200);</string>
       <widget class="QLabel" name="branch_employee_label">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>90</y>
-         <width>71</width>
-         <height>21</height>
+         <x>130</x>
+         <y>80</y>
+         <width>121</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);
-font: 75 12pt &quot;Century Gothic&quot;;</string>
+font: 75 22pt &quot;Century Gothic&quot;;</string>
        </property>
        <property name="text">
         <string>5</string>
@@ -204,7 +204,7 @@ font: 75 12pt &quot;Century Gothic&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 15pt &quot;Century Gothic&quot;;
+        <string notr="true">font: 75 10pt &quot;Century Gothic&quot;;
 background-color: rgb(255, 85, 255);
 background-color: rgb(209, 0, 209);
 background-color: rgb(200, 200, 200);</string>
@@ -226,7 +226,7 @@ background-color: rgb(200, 200, 200);</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 15pt &quot;Century Gothic&quot;;
+        <string notr="true">font: 75 10pt &quot;Century Gothic&quot;;
 background-color: rgb(255, 85, 255);
 background-color: rgb(209, 0, 209);
 background-color: rgb(200, 200, 200);</string>
@@ -248,7 +248,7 @@ background-color: rgb(200, 200, 200);</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 15pt &quot;Century Gothic&quot;;
+        <string notr="true">font: 75 10pt &quot;Century Gothic&quot;;
 background-color: rgb(255, 85, 255);
 background-color: rgb(209, 0, 209);
 background-color: rgb(200, 200, 200);</string>
@@ -263,16 +263,16 @@ background-color: rgb(200, 200, 200);</string>
       <widget class="QLabel" name="Branch_student_label">
        <property name="geometry">
         <rect>
-         <x>580</x>
-         <y>90</y>
-         <width>71</width>
-         <height>21</height>
+         <x>560</x>
+         <y>80</y>
+         <width>121</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);
-font: 75 12pt &quot;Century Gothic&quot;;</string>
+font: 75 22pt &quot;Century Gothic&quot;;</string>
        </property>
        <property name="text">
         <string>10</string>
@@ -284,16 +284,16 @@ font: 75 12pt &quot;Century Gothic&quot;;</string>
       <widget class="QLabel" name="Branch_revenue_label">
        <property name="geometry">
         <rect>
-         <x>590</x>
-         <y>210</y>
-         <width>71</width>
-         <height>21</height>
+         <x>550</x>
+         <y>200</y>
+         <width>151</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);
-font: 75 12pt &quot;Century Gothic&quot;;</string>
+font: 75 22pt &quot;Century Gothic&quot;;</string>
        </property>
        <property name="text">
         <string>1000</string>
@@ -305,16 +305,16 @@ font: 75 12pt &quot;Century Gothic&quot;;</string>
       <widget class="QLabel" name="Branch_teacher_label">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>210</y>
-         <width>71</width>
-         <height>21</height>
+         <x>140</x>
+         <y>200</y>
+         <width>101</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);
-font: 75 12pt &quot;Century Gothic&quot;;</string>
+font: 75 22pt &quot;Century Gothic&quot;;</string>
        </property>
        <property name="text">
         <string>5</string>

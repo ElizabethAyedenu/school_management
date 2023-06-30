@@ -32,12 +32,14 @@ class Main(QMainWindow, FORM_CLASS):
     selectedpaymentid=None
     selectedstu_courseId=None
     
+    
 
     def __init__(self,parent=None):
         super(Main,self).__init__(parent)
         QMainWindow.__init__(self)
         self.setupUi(self)  
         #GET ALL DATA
+        selectedDashBranchItem=0
         self.GET_CLASS_DATA()
         self.GET_BRANCH_DATA()
         self.GET_STUDENT_DATA()
@@ -54,6 +56,7 @@ class Main(QMainWindow, FORM_CLASS):
         self.course_add_btn.clicked.connect(self.SAVE_COURSES_DATA)
         self.add_payment_btn_3.clicked.connect(self.SAVE_PAYMENTS_DATA)
         self.stu_course_add_btn.clicked.connect(self.SAVE_STU_COURSES_DATA)
+        self.Dashboard_branch_drop.currentIndexChanged.connect(self.ListenToDashboardClicked)
 
         #DELETE CLICK EVENTS
         self.deleteBranchBtn.clicked.connect(self.deleteBranchData)
@@ -75,6 +78,18 @@ class Main(QMainWindow, FORM_CLASS):
         self.payments_table_widget.cellClicked.connect(self.getPaymentClicked)
         self.stu_course_table_widget.cellClicked.connect(self.getStu_coursesClicked)
     
+    def ListenToDashboardClicked(self, data):
+        global selectedDashBranchItem
+        selectedDashBranchItem=self.Dashboard_branch_drop.currentData()
+        self.GET_STUDENT_DATA()
+        self.GET_EMPLOYEES_DATA()
+        self.GET_PAYMENTS_DATA()
+
+        
+
+    
+        
+
     
     def getBranchClicked(self, row, column):
         global selectedBranchId
@@ -243,6 +258,7 @@ class Main(QMainWindow, FORM_CLASS):
         selectedBranchId=None
         totalBranch=0
         
+        
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
             totalBranch=totalBranch+1
             self.branch_table_widget.insertRow(row_number)
@@ -278,19 +294,25 @@ class Main(QMainWindow, FORM_CLASS):
     
     
     def GET_STUDENT_DATA(self): 
+        global selectedDashBranchItem
         global selectedstudentId
         query=''' SELECT * from students ''' 
         self.student_table_widget.setRowCount(0)
         selectedstudentId= None
         totalStudents=0
+        totaldashStudents=0
 
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
             
             totalStudents=totalStudents+1
+            if(selectedDashBranchItem==row_data[3]):
+                totaldashStudents=totaldashStudents+1
+        
             self.student_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.student_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
         self.Total_students_label.setText(str(totalStudents))
+        self.Branch_student_label.setText(str(totaldashStudents))
         for item_data in self.GET_DATA_FROM_DB(query):
             self.payment_student_drop.addItem(item_data[1],item_data[0])
             self.stu_course_student_drop_btn.addItem(item_data[1],item_data[0])
@@ -298,6 +320,7 @@ class Main(QMainWindow, FORM_CLASS):
     # here is our code
     
     def GET_EMPLOYEES_DATA(self): 
+        global selectedDashBranchItem
         global selectedemployeeId
 
         query=''' SELECT * from employees ''' 
@@ -306,17 +329,30 @@ class Main(QMainWindow, FORM_CLASS):
         selectedemployeeId=None
         totalEmp=0
         totalTeacher=0
-        
+        # total number of employee and teacher by branch
+        totalDashEmp=0
+        totalDashteacher=0
+                
         
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
             totalEmp=totalEmp+1
-            print(row_data[2])
             if(row_data[2]=="Teacher"):
                 totalTeacher=totalTeacher+1
+                
+
+            if(selectedDashBranchItem==row_data[6]):
+                totalDashEmp=totalDashEmp+1
+            
+            if(selectedDashBranchItem==row_data[6]) & (row_data[2]=="Teacher"):
+                totalDashteacher=totalDashteacher+1
+
+
             self.employee_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.employee_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
-                
+        
+        self.branch_employee_label.setText(str(totalDashEmp))
+        self.Branch_teacher_label.setText(str(totalDashteacher))
         self.Total_employee_label.setText(str(totalEmp))
         self.Total_teachers_label.setText(str(totalTeacher))
         for item_data in self.GET_DATA_FROM_DB(query):
@@ -342,20 +378,26 @@ class Main(QMainWindow, FORM_CLASS):
     # here is our code
     
     def GET_PAYMENTS_DATA(self):
+        global selectedDashBranchItem
         global selectedpaymentid        
         query=''' SELECT * from payments '''        
         self.payments_table_widget.setRowCount(0)
         selectedpaymentid=None 
-        totalRevenue=0     
+        totalRevenue=0
+        # Total Revenue by branch
+        totalBranchRevenue=0     
 
         for row_number, row_data in enumerate(self.GET_DATA_FROM_DB(query)):
-           
-           
             totalRevenue=totalRevenue+row_data[6]
+
+            if(selectedDashBranchItem==row_data[2]) :
+                totalBranchRevenue=totalBranchRevenue+ row_data[6]
+
             self.payments_table_widget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.payments_table_widget.setItem(row_number,column_number,QTableWidgetItem(str(data)))
             self.Total_revenue_label.setText(str(totalRevenue))
+            self.Branch_revenue_label.setText(str(totalBranchRevenue))
                 
     # here is our code
     
@@ -489,6 +531,9 @@ class Main(QMainWindow, FORM_CLASS):
         self.GET_STU_COURSES_DATA()
     
 def main():
+    global selectedDashBranchItem
+    selectedDashBranchItem=0
+
     app=QApplication(sys.argv)
     window=Main()
     window.show()
