@@ -44,7 +44,7 @@ font: 14pt &quot;Cambria&quot;;
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Dashboard_tab">
      <attribute name="title">
@@ -143,7 +143,7 @@ color: rgb(255, 255, 255);</string>
         <x>20</x>
         <y>130</y>
         <width>831</width>
-        <height>311</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -627,22 +627,6 @@ background-color: rgb(221, 221, 221);
        </property>
       </item>
      </widget>
-     <widget class="QLabel" name="branch_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>600</x>
-        <y>60</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="deleteBranchBtn">
       <property name="geometry">
        <rect>
@@ -682,22 +666,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
      <attribute name="title">
       <string>Classes</string>
      </attribute>
-     <widget class="QLabel" name="Class_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>600</x>
-        <y>60</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="class_name">
       <property name="geometry">
        <rect>
@@ -853,22 +821,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
      <attribute name="title">
       <string>Employees</string>
      </attribute>
-     <widget class="QLabel" name="Employee_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>10</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QComboBox" name="Employee_type_drop_3">
       <property name="geometry">
        <rect>
@@ -1219,22 +1171,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
      <attribute name="title">
       <string>Students</string>
      </attribute>
-     <widget class="QLabel" name="student_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>600</x>
-        <y>20</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="Student_name_btn">
       <property name="geometry">
        <rect>
@@ -1451,22 +1387,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
      <attribute name="title">
       <string>Courses</string>
      </attribute>
-     <widget class="QLabel" name="course_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>670</x>
-        <y>10</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="Course_price_btn">
       <property name="geometry">
        <rect>
@@ -1682,22 +1602,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
      <attribute name="title">
       <string>Payments</string>
      </attribute>
-     <widget class="QLabel" name="payment_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>20</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_45">
       <property name="geometry">
        <rect>
@@ -2176,22 +2080,6 @@ font: 75 10pt &quot;Century Gothic&quot;;</string>
       </property>
       <property name="text">
        <string>Delete</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="stu_course_selected_id">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>20</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 6pt &quot;MS Gothic&quot;;</string>
-      </property>
-      <property name="text">
-       <string>selected_id</string>
       </property>
      </widget>
     </widget>
